@@ -60,3 +60,33 @@ input, textarea, select, .uneditable-input {
     margin-top: -2px;
     padding: 5px;
   }
+
+
+/* mixins, variables, etc. */
+
+  @mixin box_sizing {
+    -moz-box-sizing:    border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing:         border-box;
+  }
+  
+  .debug_dump {
+    clear: both;
+    float: left;
+    width: 100%;
+    margin-top: 45px;
+    @include box_sizing;
+  }
+
+  /* lists */
+
+  ul {
+    list-style: none;
+    font-size: 1.5em;
+    li{
+      border: 1px solid gray;
+      border-radius: 5px;
+      margin: 0.5em;
+      text-align: center;
+    }
+  }

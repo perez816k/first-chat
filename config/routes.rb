@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
 
   get    '/rooms',   to: 'rooms#show'
+  post   '/rooms',   to: 'rooms#create'
+  get    '/room',    to: 'room#show'
+  
 
-  resources :users
+
+  resources :room
 end
