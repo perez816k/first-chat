@@ -12,10 +12,19 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
     if @message.save
-      redirect_back(fallback_location: root_path)
+      send_message
+      #render json: @message
+      #redirect_back(fallback_location: root_path)
     else
-      render 'new'
+      render status: 422, json: @message.errors
     end
+  end
+
+  def send_message
+    ActionCable.server.broadcast(
+      "RoomChannel_#{@message.room_id}",
+      @message
+    )
   end
 
   private

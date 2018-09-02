@@ -1,24 +1,27 @@
 <% provide(:title, @room.name) %>
-<div class="row">
+<div class="container">
   <aside class="col-md-4">
-    <section class="user_info">
+    <div class="chat">
       <h1>
         <%= @room.name %>
       </h1>
 
-      <% @room.messages.each do |m| %>
-        <li>
-            <%= m.user %> > <%= m.content %>
-        </li>
-      <% end %>
+      <ul id="messages">
+        <% @room.messages.order(created_at: :asc).last(20).each do |m| %>
+          <%= render partial: "message", locals: {message: m} %>
+        <% end %>
+      </ul>
 
-      <%= form_for Message.new do |f| %>
-          <%= f.text_field :content, placeholder: "Write..."  %>
-          <%= f.hidden_field :user, :value => session[:user_name] %>
-          <%= f.hidden_field :room_id, :value => params[:id] %>
-          <%= f.submit "Send", class: "btn btn-primary" %>
-      <% end %>
+      <%= render template: "messages/new"%>
 
-    </section>
+    </div>
   </aside>
 </div>
+
+<script>
+$(document).ready(function () {
+    $( "#new_message" ).bind("ajax:complete", function() {
+    $("#message_content").val("")
+  });
+})
+</script>

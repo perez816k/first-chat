@@ -13,10 +13,10 @@
       </button>
     </div>
 
-    <ul class="users">
+    <ul class="rooms">
       <% @rooms.each do |room| %>
-        <li>
-          <a href="/rooms/<%= room.id %>"><%= room.name %></a>
+        <li class="room_box">
+          <%= link_to room.name, room, method: :get %>
         </li>
       <% end %>
     </ul>
