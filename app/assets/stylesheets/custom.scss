@@ -80,13 +80,27 @@ input, textarea, select, .uneditable-input {
 
   /* lists */
 
-  ul {
+  .rooms {
     list-style: none;
     font-size: 1.5em;
-    li{
+    .room_box{
       border: 1px solid gray;
       border-radius: 5px;
       margin: 0.5em;
       text-align: center;
     }
+  }
+
+  /* chat */
+
+  .chat{
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 2em;
+    
+  }
+
+  .chat_write{
+    width: 100%;
+    margin: 1em;
   }
