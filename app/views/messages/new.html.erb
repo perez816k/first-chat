@@ -1,6 +1,8 @@
 <%= form_for Message.new, remote: true, :html => {class: 'chat_write'} do |f| %>
-    <%= f.text_field :content, placeholder: "Write..."  %>
     <%= f.hidden_field :user, :value => session[:user_name] %>
     <%= f.hidden_field :room_id, :value => params[:id] %>
-    <%= f.submit "Send", class: "btn btn-primary" %>
+    <%= f.text_field :content, placeholder: "Write...", class: "col-md-11 col-xs-9", :autocomplete => :off %>
+    <div class="col-md-1 col-xs-1 buttom-send">
+        <%= f.submit "Send", class: "btn btn-primary" %>
+    </div>
 <% end %>

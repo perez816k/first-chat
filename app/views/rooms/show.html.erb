@@ -1,27 +1,40 @@
-<% provide(:title, @room.name) %>
-<div class="container">
-  <aside class="col-md-4">
-    <div class="chat">
-      <h1>
-        <%= @room.name %>
-      </h1>
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+      <meta charset="utf-8"/>
+      <title>Room</title>
 
-      <ul id="messages">
-        <% @room.messages.order(created_at: :asc).last(20).each do |m| %>
-          <%= render partial: "message", locals: {message: m} %>
-        <% end %>
-      </ul>
+      <script>
+        $(document).ready(function () {
+            $("#messages").animate({ scrollTop: $('#messages')[0].scrollHeight}, 1000);
+            $( "#new_message" ).bind("ajax:complete", function() {
+              $("#message_content").val("");
+              $("#messages").animate({ scrollTop: $('#messages')[0].scrollHeight}, 1000);
+          });
+        })
+      </script>
+      
+    </head>
+    <body>
+      <div class="container">
+        <div class="chat">
+          <div class="col-md-12 col-xs-12">
 
-      <%= render template: "messages/new"%>
+            <h1>
+              <%= @room.name %>
+            </h1>
 
-    </div>
-  </aside>
-</div>
+            <ul id="messages" class="scroll">
+              <% @room.messages.order(created_at: :asc).last(20).each do |m| %>
+                <%= render partial: "message", locals: {message: m} %>
+              <% end %>
+            </ul>
 
-<script>
-$(document).ready(function () {
-    $( "#new_message" ).bind("ajax:complete", function() {
-    $("#message_content").val("")
-  });
-})
-</script>
+            <%= render template: "messages/new"%>
+
+          </div>
+        </div>
+      </div>
+    </body>
+</html>
+
